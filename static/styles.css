@@ -1,0 +1,1608 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+
+    /* Background color */
+}
+#data{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height:300px;
+    align-items: center;
+
+}
+
+.error-text {
+    color: White;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.box {
+    width: 20%; /* Each box takes up 18% of the width */
+    height: 100%; /* Height matches the parent #data container */
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent; /* Optional: add a background color for visibility */
+    overflow: hidden;
+    align-items: center;
+}
+.box img{
+    width: 70%;
+}
+.box h2{
+    color: white;
+}
+#first-section {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+
+    transform: translate(-50%, 0%);
+    top: 50%;
+    left: 50%;
+    transition: top 1s, transform 1s;
+    /* Center it initially */
+    opacity: 0.9;
+    z-index: 2;
+
+}
+#first-section.active{
+
+    top: 0%; /* Adjusted to make room for cards */
+    transform: translate(-50%, 0%);
+}
+
+
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+
+
+    z-index: -1;
+    opacity: 1; /* Adjust this value for transparency effect */
+
+}
+#about-video {
+    width: 100vw; /* Make it span the full width of the about section */
+    height: auto; /* Maintain the aspect ratio */
+
+    display: block; /* Ensure the video behaves as a block element */
+    object-fit: cover;
+}
+#imgeee{
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+#background-video2 {
+    width: 100vw; /* Make it span the full width of the about section */
+    height: auto; /* Maintain the aspect ratio */
+
+    display: block; /* Ensure the video behaves as a block element */
+    object-fit: cover;
+}
+
+/* Modal styling */
+.modal {
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 80%;
+    height: 90%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+
+.modal-content{
+    position: relative;
+    background: #01051d;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+.modal-content h2{
+    color: white;
+    overflow-y: auto;
+}
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*
+#logo {
+    font-size: 2em;
+    margin-bottom: 0px;
+    color: #e0e0e0;
+}
+*/
+#logo img {
+    width: 1200px;  /* Adjust the width as needed */
+    height: auto;  /* Maintains the aspect ratio */
+}
+.search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    margin: 20px auto; /* Centers the search bar */
+    position: relative;
+}
+
+#search-bar {
+    padding: 10px;
+    font-size: 1em;
+}
+
+#search-button {
+    padding: 10px;
+    font-size: 1em;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 50px 12px 20px;
+    border-radius: 50px; /* Makes the input fully rounded */
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.search-input2 {
+    width: 40%;
+    margin-left: 29%;
+    margin-top: 28px;
+    height: 40%;
+    border-radius: 50px; /* Makes the input fully rounded */
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.search-input::placeholder {
+    color: #bbb; /* Placeholder text color */
+}
+#search-button2 {
+    padding: 10px;
+    font-size: 1em;
+}
+
+#second-section {
+    position: relative;
+    width: 100%;
+    height: 0px;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;
+}
+#second-section.active{
+    height: 750px;
+}
+.card {
+    flex: 1;
+    margin: 0 10px; /* Add space between the cards */
+    background-color: #e0e0e0;
+
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    justify-content: center;
+    height: 91%; /* Make the card take up 80% of the height of the second section */
+
+    padding: 10px; /* Add padding inside the card */
+    margin-top: 10px;
+    border-radius: 15px; /* Rounded edges */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.b1{
+    width:90%;
+    margin-bottom: 2%;
+    margin-left: 2px;
+    margin-right: 2px;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 8px; /* Rounded corners for the background */
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    height: 30%;
+}
+
+.b2{
+    width:90%;
+    margin-bottom: 2%;
+    margin-left: 2px;
+    margin-right: 2px;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 8px; /* Rounded corners for the background */
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    height: 25%;
+}
+.card h3, .card p {
+
+    overflow: hidden; /* Hide overflowed content */
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+
+    text-align: center; /* Center-align the heading */
+}
+
+.card p {
+    margin: 5px 0;
+    text-align: center; /* Center-align the text inside the card */
+
+    overflow-y: auto; /* Allow scrolling if text overflows */
+    word-wrap: break-word; /* Break long words to prevent overflow */
+}
+
+#middle-card {
+    background-color: #d0d0ff;
+}
+
+#right-card {
+    background-color: #ffd0d0;
+}
+
+/* Animation for first section sliding out */
+#first-section.slide-up {
+    transform: translate(-50%, 0); /* Move to final position */
+    top: 3%; /* Adjust as necessary */
+}
+
+#suggestions-box {
+    position: absolute;
+    top: 105%;
+    background-color: white;
+
+    max-height: 150px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll; /* Enable scrolling */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+
+    z-index: 1000;
+}
+#suggestions-box::-webkit-scrollbar {
+    display: none;
+}
+#suggestions-box.active {
+    display: block; /* Add this class with JS to show the box when needed */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #01051d;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative; /* Needed for the close button to position correctly */
+}
+
+
+
+.popup-header {
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+}
+
+.popup-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+
+.popup-body table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between cells */
+    margin-bottom: 20px; /* Add some space below the table */
+}
+
+.popup-body th,
+.popup-body td {
+    border: 1px solid #ddd; /* Light border around cells */
+    padding: 8px; /* Space inside each cell */
+    text-align: center; /* Align text to the left */
+}
+
+.popup-body th {
+    background-color: lightgray; /* Header background color */
+    color: black; /* Header text color */
+    font-weight: bold; /* Bold header text */
+}
+
+.popup-body tr:nth-child(even) {
+    background-color: #f2f2f2; /* Even row background color */
+}
+
+.popup-body tr:nth-child(odd) {
+    background-color: #ddd; /* Highlight row on hover */
+}
+
+.popup-body td {
+    color: #333; /* Darker text color */
+}
+
+.popup-body table {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow around the table */
+    border-radius: 5px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensure rounded corners apply */
+}
+.popup-body table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between cells */
+    margin-bottom: 20px; /* Add some space below the table */
+}
+
+.modal-content th,
+.modal-content td {
+    border: 1px solid #ddd; /* Light border around cells */
+    padding: 8px; /* Space inside each cell */
+    text-align: center; /* Align text to the left */
+}
+
+.modal-content th {
+    background-color: lightgray; /* Header background color */
+    color: black; /* Header text color */
+    font-weight: bold; /* Bold header text */
+}
+
+.modal-content tr:nth-child(even) {
+    background-color: #f2f2f2; /* Even row background color */
+}
+
+.modal-content tr:nth-child(odd) {
+    background-color: #ddd; /* Highlight row on hover */
+}
+
+.modal-content td {
+    color: #333; /* Darker text color */
+}
+
+.modal-content table {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow around the table */
+    border-radius: 5px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensure rounded corners apply */
+}
+
+html {
+    scroll-behavior: smooth; /* Enables smooth scrolling */
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px; /* Increase the size of the close button */
+    color: red; /* Set the color of the close button */
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 10;
+}
+#about {
+    background-color: #dcd1d1; /* Background color */
+     /* Adds some space around the content */
+    text-align: center; /* Centers the text inside this div */
+}
+
+/* Styling for the About heading */
+.about-heading {
+    font-size: 32px; /* Size of the heading text */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Color of the heading text */
+}
+
+/* Styling for the About image */
+.about-image {
+    max-width: 100%; /* Makes sure the image is responsive */
+    height: auto; /* Maintains the aspect ratio */
+    margin-bottom: 20px; /* Adds space below the image */
+}
+
+#team {
+    background-color: #e1bdbd; /* Background color */
+
+    text-align: center; /* Centers the text inside this div */
+}
+
+/* Styling for the About heading */
+.team-heading {
+    font-size: 32px; /* Size of the heading text */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Color of the heading text */
+}
+
+/* Styling for the About image */
+.team-image {
+    max-width: 100%; /* Makes sure the image is responsive */
+    height: auto; /* Maintains the aspect ratio */
+    margin-bottom: 20px; /* Adds space below the image */
+}
+
+#contus {
+    background-color: black; /* Background color */
+    padding: 10px 10px; /* Adds some space around the content */
+    text-align: center; /* Centers the text inside this div */
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+
+}
+
+#citeus {
+    background-image: url("secback.svg"); /* Background color */
+    padding: 10px 10px; /* Adds some space around the content */
+    text-align: center; /* Centers the text inside this div */
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+
+}
+
+/* Styling for the About heading */
+#contus h2 {
+    font-size: 32px; /* Size of the heading text */
+    margin-bottom: 20px; /* Space below the heading */
+    color: white; /* Color of the heading text */
+    height: 10%;
+}
+
+/* Styling for the About heading */
+#citeus h2 {
+    font-size: 32px; /* Size of the heading text */
+    margin-bottom: 20px; /* Space below the heading */
+    color: white; /* Color of the heading text */
+    height: 10%;
+}
+
+.button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Slightly larger font size */
+    font-weight: bold; /* Bold text */
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+    margin: 5px;
+
+}
+
+.button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.button:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+    transform: translateY(0); /* Return to normal position on click */
+    box-shadow: 0 5px #666; /* Slight shadow when clicked */
+}
+
+.button:focus {
+    outline: none; /* Remove outline on focus */
+}
+
+
+/* CSS for the full-screen pop-up */
+#pie-chart-popup {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1000;
+    overflow: auto;
+    padding: 20px;
+
+}
+
+#pie-chart-popup .popup-content2 {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 100%;
+    max-height: 90%;
+    margin: auto;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+h3.prot_feat{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 600px;
+
+}
+
+.chart-legend {
+    margin-left: 20px;
+}
+
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label-container {
+    flex: 1;
+}
+
+.button-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#top-features-select {
+    width: 60px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+
+#top-features-select2 {
+    width: 60px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.button-container .button {
+    margin-left: 10px;
+}
+
+#xgb_pie{
+    height: 40px;
+}
+
+#rf_pie{
+    height:40px;
+}
+/*
+.label-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}*/
+
+.popup-content2 {
+    background-color: #d0d0ff; /* Card background color */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Adjust width as needed */
+     /* Adjust height as needed */
+    display: flex;
+    flex-direction: column; /* Display chart and legend side by side */
+    overflow: auto; /* Add scrollbars if necessary */
+}
+
+
+#pie-chart-popup .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4c4c;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/*
+#pie-chart-popup canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+*/
+
+
+.chart-legend {
+    width: 30%; /* Adjust width for the legend */
+    height: 100%;
+    overflow: auto; /* Add scrollbars if necessary */
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+
+.popup-content {
+    position: relative;
+    top: -100%; /* Start off-screen */
+    opacity: 0;
+    transition: all 0.5s ease; /* Adjust the speed as needed */
+}
+
+/* When the pop-up is active (visible) */
+.popup-content.active {
+    top: 0; /* Slide to original position */
+    opacity: 1; /* Fade in */
+}
+
+/* When closing the pop-up */
+.popup-content.closing {
+    top: 100%; /* Slide out of view */
+    opacity: 0; /* Fade out */
+}
+
+.popup-content2 {
+    position: relative;
+    top: -100%; /* Start off-screen */
+    opacity: 0;
+    transition: all 0.5s ease; /* Adjust the speed as needed */
+}
+
+/* When the pop-up is active (visible) */
+.popup-content2.active {
+    top: 0; /* Slide to original position */
+    opacity: 1; /* Fade in */
+}
+
+/* When closing the pop-up */
+.popup-content2.closing {
+    top: 100%; /* Slide out of view */
+    opacity: 0; /* Fade out */
+}
+
+.card h3 {
+    font-size: 24px;
+
+    color: #333; /* Darker color for the title */
+}
+.card h4{
+    font-size: 24px;
+}
+.card p {
+    font-size: 16px;
+    line-height: 1.6; /* Improves readability */
+    color: #555; /* Softer color for the text */
+    text-align: justify; /* Align text to both left and right edges */
+    padding: 10px; /* Adds some padding around the text */
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 8px; /* Rounded corners for the background */
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+#features-popup {
+    display: None;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#features-popup.active{
+    display: flex;
+}
+.popup-content3 {
+    background: white;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    height: 80vh; /* To prevent overflowing the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.close-btn:hover {
+    background: #c0392b;
+}
+
+#features-content {
+    height: 80%;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    text-align:center;
+
+    background:#01051d;
+
+}
+#features-content h3{
+    height: 15%;
+    color: white;
+}
+
+#divone{
+    height: 10%;
+    background: #01051d;
+    overflow-y: auto;
+    justify-content: center;
+}
+
+#features-content p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: white;
+}
+
+
+
+#features-content table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between cells */
+    margin-bottom: 20px; /* Add some space below the table */
+}
+
+#features-content th,
+#features-content td {
+    border: 1px solid #ddd; /* Light border around cells */
+    padding: 8px; /* Space inside each cell */
+    text-align: center; /* Align text to the left */
+}
+
+#features-content th {
+    background-color: lightgray; /* Header background color */
+    color: black; /* Header text color */
+    font-weight: bold; /* Bold header text */
+}
+
+#features-content tr:nth-child(even) {
+    background-color: #f2f2f2; /* Even row background color */
+}
+
+#features-content tr:nth-child(odd) {
+    background-color: #ddd; /* Highlight row on hover */
+}
+
+#features-content td {
+    color: #333; /* Darker text color */
+}
+
+#features-content table {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow around the table */
+    border-radius: 5px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensure rounded corners apply */
+}
+#features-content table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between cells */
+    margin-bottom: 20px; /* Add some space below the table */
+}
+
+
+/* Pagination Styles */
+#pagination {
+    height: 10%;
+    background: #01051d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#pagination button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Slightly larger font size */
+    font-weight: bold; /* Bold text */
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+    margin: 5px;
+}
+
+#pagination button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+#pagination button:hover:not(:disabled) {
+    background-color: #2980b9;
+}
+
+#page-info {
+    font-size: 16px;
+    color: #333;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.feature-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#third-section {
+    position: relative;
+    display: flex;
+    height: 750px;
+    width: 100%;
+
+}
+
+#left-third-section {
+    width: 32.5%;
+    padding: 10px;
+    background-color: black;
+}
+#left-third-section {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+
+    text-align: center;
+    overflow-y: auto;
+}
+
+#left-third-section h3 {
+    font-weight: bold; /* Bold header text */
+    font-size: x-large;
+    color: white;
+    text-transform: uppercase;
+    margin: 0; /* Remove default margin */
+    margin-bottom: 10px;
+    overflow: hidden; /* Hide overflowed content */
+    text-overflow: ellipsis;
+}
+
+#left-third-section h6 {
+    font-weight: bold; /* Bold header text */
+    font-size: medium;
+    color: white;
+    padding: 10px;
+    margin: 0; /* Remove default margin */
+    margin-bottom: 10px;
+    overflow: hidden; /* Hide overflowed content */
+    text-overflow: ellipsis;
+}
+
+#fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background-color: black; /* Semi-transparent background */
+    opacity: 0.9;
+    color: #333; /* Text color */
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    z-index: 1000; /* Ensure header is above other content */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#about-link {
+    margin-right: 20px; /* Adds space on the right of the link */
+    color: white; /* Text color */
+    text-decoration: none; /* Removes underline */
+    font-size: 24px;
+}
+
+/* Hover effect for the 'About' link */
+#about-link:hover {
+    color: #007BFF; /* Change color on hover */
+}
+
+#header-button {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Removes underline from the link */
+}
+
+#header-button-image {
+    height: 40px; /* Adjust the size of the image as needed */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    padding-left: 20px;
+}
+
+#vertical-line {
+    width: 4px;
+    background-color: black;
+    margin: 0 0px; /* Space between the sections and the line */
+    height: 100%; /* Make the line full height */
+    border-right: 4px dashed white; /* Disconnected line style */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#left-third-section p {
+    font-weight: bold; /* Bold text */
+    font-size: 72px;
+    color: white;
+    margin-top: 10px; /* Remove default margin */
+    overflow: hidden; /* Hide overflowed content */
+    text-overflow: ellipsis;
+}
+#right-third-section {
+    width: 67.5%;
+    padding: 10px;
+    background-color: black;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    overflow-y:auto;
+    text-align: center;
+}
+
+#right-third-section p {
+    font-weight: bold; /* Bold text */
+    font-size: 24px;
+    color: white;
+    margin-top: 10px; /* Remove default margin */
+    padding: 20px;
+    overflow-y: auto; /* Hide overflowed content */
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+}
+
+#right-third-section h3 {
+    font-weight: bold; /* Bold header text */
+    font-size: 48px;
+    color: white;
+    text-transform: uppercase;
+    margin: 0; /* Remove default margin */
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.b1 p{
+
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
+
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+
+    text-align: center; /* Center-align the heading */
+    text-align: center; /* Center-align the text inside the card */
+
+    overflow-y: auto; /* Allow scrolling if text overflows */
+    word-wrap: break-word; /* Break long words to prevent overflow */
+}
+
+.b2 p{
+
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
+
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflowed text */
+
+    text-align: center; /* Center-align the heading */
+    text-align: center; /* Center-align the text inside the card */
+
+    overflow-y: auto; /* Allow scrolling if text overflows */
+    word-wrap: break-word; /* Break long words to prevent overflow */
+}
+
+
+#viewer {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 100%;
+    max-height: 90%;
+    margin: auto;
+
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+#viewer{
+
+        background-color: #d0d0ff; /* Card background color */
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%; /* Adjust width as needed */
+         /* Adjust height as needed */
+        min-height: 80%;
+
+
+
+
+}
+
+.search-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+
+}
+
+.search-btn svg {
+    color: #333; /* Icon color */
+    width: 24px;
+    height: 24px;
+}
+
+.search-btn:focus {
+    outline: none;
+}
+
+.search-btn5 {
+    position: absolute;
+    right: 30%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    padding-top: 27px;
+}
+
+.search-btn5 svg {
+    color: #333; /* Icon color */
+    width: 24px;
+    height: 24px;
+}
+
+.search-btn5:focus {
+    outline: none;
+}
+
+
+#typedtext{
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
+#firpie {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#xgbr, #rfr {
+    display: inline-block;
+    width: 48%; /* Adjusts the width to fit them side by side */
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Space between the buttons */
+}
+
+.dropdown-content {
+   display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #1E3A5F; /* Dark blue background */
+    color: #ffffff; /* White text color */
+    min-width: 220px;
+    border: 1px solid #162D4A; /* Slightly darker blue border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px;
+    z-index: 1;
+}
+
+.dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #162D4A; /* Line between items */
+}
+
+/* Add spacing between text and button */
+.dropdown-item span {
+    font-size: 14px;
+    margin-right: 20px; /* Adds space between the text and button */
+}
+
+/* Remove bottom border for the last item */
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Button styling within dropdown */
+.dropdown-item button {
+    padding: 5px 10px;
+    background-color: #27496D; /* Lighter blue for button */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item button:hover {
+    background-color: #3B6A9E; /* Slightly lighter blue on hover */
+}
+#firpie p {
+    margin-left: 50px;
+    margin-right: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 20px; /* Add spacing between the paragraph and the button */
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    background-image: url("secback.svg");
+    height: 0px; /* Optional: makes the container take full viewport height */
+
+
+}
+#container.active{
+    padding-top: 30px;
+    height: 720px;
+}
+
+#top-div, #bottom-div {
+    width: 100%;
+    display: flex;
+    height: 100px; /* Adjust height as needed */
+    background-color: transparent; /* Optional for visualizing the layout */
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#top-div h1{
+    color: white;
+    font-weight: bolder;
+}
+
+#middle-container {
+    display: flex;
+    flex-grow: 1; /* Allows it to grow and fill space between top and bottom */
+}
+
+#left-div, #right-div {
+    width: 50%;
+    height: 550px; /* Same height for both divs */
+    background-color: transparent; /* Optional for visualization */
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+#left-div{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+#left-top{
+    height: 385px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#left-bottom{
+    height: 165px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#left-top h2{
+    color: white;
+    font-weight: bolder;
+    padding: 10px;
+    overflow-y:hidden;
+}
+.box h3{
+    color: white;
+    font-weight: bolder;
+
+    overflow-y:hidden;
+}
+#left-top p{
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    overflow-y: auto;
+}
+#right-div{
+    position: relative;
+}
+
+/* Optional styling for the bottom div */
+#bottom-div {
+    background-color: transparent; /* Optional for visualization */
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#help{
+    height: 750px;
+    background-image: url("secback.svg");
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align cards to the center horizontally */
+    justify-content: space-around; /* Space between the cards */
+}
+
+.card2 {
+    width: 70%; /* Cards take 70% of the #help div's width */
+    height: 110px; /* Cards take 20% of the #help div's height */
+    background-color: lightgray;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 10px 0; /* Optional spacing between cards */
+    overflow: hidden;
+}
+
+#help h1{
+    color: white;
+    font-weight: bolder;
+}
+
+.left {
+    height: 90%;
+    width: 30%;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin: 5px;
+    overflow: auto;
+}
+
+.right {
+    height: 90%;
+    width: 70%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+
+
+
+}
+
+.left2 {
+    height: 90%;
+    width: 70%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    text-align: center;
+
+}
+
+.right2 {
+    height: 90%;
+    width: 30%;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin: 5px;
+    overflow: auto;
+}
+
+.left h2{
+    color: white;
+    overflow-y: auto;
+
+}
+
+.right p{
+    height: 100%;
+    color: black;
+
+    overflow-y: auto;
+}
+
+.left2 p{
+    color: black;
+
+    overflow-y: auto;
+}
+
+.right2 h2{
+    color: white;
+    overflow-y: auto;
+
+}
+
+.linky{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+#ack{
+    height: 800px;
+    background-image: url("secback.svg");
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align cards to the center horizontally */
+    justify-content: space-around; /* Space between the cards */
+}
+
+#ack h2{
+    color: white;
+    font-weight: bolder;
+}
+
+#acky{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height:300px;
+    align-items: center;
+
+}
+
+#acky2{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height:300px;
+    align-items: center;
+
+}
+
+#overall{
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:600px;
+    align-items: center;
+
+}
+#subacky {
+    width: 20%; /* Each box takes up 18% of the width */
+    height: 100%; /* Height matches the parent #data container */
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent; /* Optional: add a background color for visibility */
+    overflow: hidden;
+    align-items: center;
+    padding: 10px;
+}
+#page-info{
+    color: white;
+}
+#subacky p{
+    color: white;
+    font-size: 16px;
+}
+
+
+
+/* Style for the spinner */
+#loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: none;
+  }
+
+  #loading-spinner .spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+  }
+
+  /* Animation for the spinner */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .footer {
+    display: flex;
+    height: 90%;
+    width: 100%;
+}
+
+  .footer2 {
+    display: flex;
+    height: 90%;
+    width: 100%;
+}
+
+.footer2 h4 {
+    font-size: 16px;
+    font-weight: normal;
+    color: white;
+    line-height: 1.6;
+    margin: 10px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer2 h4 a {
+    color: #0077cc;
+    text-decoration: underline;
+}
+.footer2 h4 a:hover {
+    color: #004c99;
+}
+
+.footer-link {
+    display: inline-block; /* Ensure the link does not affect the layout */
+}
+
+/* Style for the left and right sections */
+.footer-left, .footer-right {
+    flex: 0 0 20%; /* Fixed width of 20% */
+    background-color: transparent /* Optional: Background color for visibility */
+}
+
+/* Style for the middle section */
+.footer-middle {
+    flex: 0 0 60%; /* Fixed width of 60% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+/* Style for the images within the middle section */
+.footer-image {
+    margin: 0 10px; /* Optional: Space between images */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure images fit within their container */
+
+}
+
+.footer-image2 {
+    margin: 0 10px; /* Optional: Space between images */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 80%; /* Ensure images fit within their container */
+
+}
+
+/* Optional: Add some styling for the footer */
+.footer {
+    padding: 10px; /* Add some padding around the footer */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}

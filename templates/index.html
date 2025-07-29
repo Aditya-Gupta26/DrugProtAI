@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrugProtAI</title>
+    <link rel="icon" type="image/svg" href="{{ url_for('static', filename ='logo-head.svg')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+    <script src="https://unpkg.com/@molstar/molstar/build/molstar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <header id="fixed-header">
+        <a href="{{ url_for('index') }}" id="header-button">
+            <img src="{{ url_for('static', filename='logo-head.svg') }}" alt="Home Button" id="header-button-image"/>
+        </a>
+        <nav>
+            <a href="#about" id="about-link">About</a>
+            <a href="#team" id="about-link">Team</a>
+            <a href="#help" id="about-link">Help</a>
+            <a href = "#ack" id = "about-link">Acknowledgements</a>
+            <a href="#contus" id="about-link">Contact Us</a>
+            <a href="#citeus" id="about-link">Cite Us</a>
+        </nav>
+    </header>
+    <video autoplay muted loop id="background-video">
+        <source src="{{ url_for('static', filename='About.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+    <div id="first-section">
+
+        <div id="typedtext"></div>
+        <div id="logo">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="Logo" />
+        </div>
+        <div class="search-section">
+
+            <input type="text" id="search-bar" class = "search-input" placeholder="Enter UniProt ID" onkeydown="checkEnter(event)">
+            <button onclick="searchProtein()" id="search-button2" class = "search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <div id="suggestions-box"></div>
+        </div>
+        <div id="data">
+
+            <div class="box">
+                <a href="https://www.uniprot.org/" class="linky"></a>
+                <img src="{{ url_for('static', filename='one.svg') }}" alt="Logo" />
+                <h3>
+                    20k+ Proteins
+                </h3>
+            </div>
+            <div class="box">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/" class="linky"></a>
+                <img src="{{ url_for('static', filename='two.svg') }}" alt="Logo" />
+                <h3>
+                    2M+ Publications
+                </h3>
+            </div>
+            <div class="box">
+                <a href="https://go.drugbank.com/" class="linky"></a>
+                <img src="{{ url_for('static', filename='three.svg') }}" alt="Logo" />
+                <h3>
+                    2k+ Druggable Proteins
+                </h3>
+            </div>
+            <div class="box">
+                <a href="https://go.drugbank.com/" class="linky"></a>
+                <img src="{{ url_for('static', filename='four.svg') }}" alt="Logo" />
+                <h3>
+                    600+ Investigational Proteins
+                </h3>
+            </div>
+        </div>
+        <div id="firpie">
+            <p>A total of 183 features have been used for predicting the druggability index, in doing so, some features have been shown to be of more importance in terms of their contribution. Here, we show the contribution of each of the protein-features.</p>
+            <button id = "view-pie-info-btn" class = "button" onclick="showPiePopup()">View Pie Chart</button>
+            <p>We have used Random Forest and XGBoost models to accurate predict the druggability potential of a human protein. Users are free to download the results mapping the DI values obtained for each protein.</p>
+            <div class="button-container">
+                <button id="xgbr" class="button" onclick="toggleDropdown('xgbrDropdown')">XGBoost Results</button>
+                <button id="rfr" class="button" onclick="toggleDropdown('rfrDropdown')">Random Forest Results</button>
+            </div>
+            <div id="xgbrDropdown" class="dropdown-content">
+                <div class="dropdown-item">
+                    <span> Druggability Index by XGBoost PEC(Partition Ensemble Classifier) for investigational proteins
+</span>
+                    <button onclick="downloadFile('XGB_DI.csv')">Download</button>
+                </div>
+                <div class="dropdown-item">
+                    <span>Druggability Index by XGBoost PLOEC(Partition Leave-One-Out Ensemble Classifier) for non-druggable proteins of the train set
+</span>
+                    <button onclick="downloadFile('XGB_DI_train_non_druggable.csv')">Download</button>
+                </div>
+                <div class="dropdown-item">
+                    <span>Druggability Index by XGBoost PEC(Partition Ensemble Classifier) for druggable proteins of the train set
+</span>
+                    <button onclick="downloadFile('XGB_DI_train_druggable.csv')">Download</button>
+                </div>
+            </div>
+
+            <div id="rfrDropdown" class="dropdown-content">
+                <div class="dropdown-item">
+                    <span>Druggability Index by RF PEC(Partition Ensemble Classifier) for investigational proteins</span>
+                    <button onclick="downloadFile('RF_DI.csv')">Download</button>
+                </div>
+                <div class="dropdown-item">
+                    <span>Druggability Index by RF PLOEC(Partition Leave-One-Out Ensemble Classifier) for non-druggable proteins of the train set</span>
+                    <button onclick="downloadFile('RF_DI_train_non_druggable.csv')">Download</button>
+                </div>
+                <div class="dropdown-item">
+                    <span>Druggability Index by RF PEC(Partition Ensemble Classifier) for druggable proteins of the train set</span>
+                    <button onclick="downloadFile('XGB_DI_train_druggable.csv')">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="container">
+        <img src="{{ url_for('static', filename='secback.svg') }}" alt="About Image"  id = "imgeee">
+    </div>
+
+    <div id="error-popup" style="
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        z-index: 9999;
+    ">
+        We couldn't find any associated drug target in literature.
+    </div>
+    <div id="about">
+
+        <video autoplay muted loop id="background-video2">
+            <source src="{{ url_for('static', filename='abouty.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <!-- Add more content here as needed -->
+    </div>
+    <div id="help">
+        <h1>FAQ's</h1>
+        <div class="card2">
+            <div class="left">
+                <h2>What does DrugProtAI do?</h2>
+            </div>
+            <div class="right">
+                <p>
+                    DrugProtAI is a comprehensive web-based tool designed for evaluating the druggability of proteins. It allows users to search for a protein using its UniProt ID and provides detailed information, including feature contributions from machine learning models like XGBoost (XGB) and Random Forest (RF), druggability predictions, and an interactive 3D protein structure viewer. The platform integrates data from several knowledgebases such as UniProt, DrugBank, PubMed, and Alphafold, making it a powerful resource for researchers aiming to assess the potential of proteins as drug targets.
+                </p>
+            </div>
+        </div>
+        <div class="card2">
+            <div class="left2">
+                <p>
+                    The Druggability Index (DI) of a protein is then defined as the probability of the given protein being approved-druggable
+                </p>
+            </div>
+            <div class="right2">
+                <h2>
+                    What is the meaning of druggability index?
+                </h2>
+            </div>
+        </div>
+        <div class="card2">
+            <div class="left">
+                <h2>What are the features on which the tool has been developed?
+                </h2>
+            </div>
+            <div class="right">
+                <p>
+                    DrugProtAI is built using 183 features from UniProt, including protein domains, PPI properties, PTM counts, glycosylation, subcellular locations, flexibility sequence properties, and physicochemical properties. Additional features include latent values from an autoencoder and GDPC encodings. These features capture diverse biological and physicochemical aspects critical for predicting protein druggability.
+                </p>
+            </div>
+        </div>
+        <div class="card2">
+            <div class="left2">
+                <p>
+                    DrugProtAI uses two machine learning models: XGBoost (XGB) and Random Forest (RF). These models are trained on 183 protein features, including biological, physicochemical, and structural properties. The reliability of these models is ensured through rigorous cross-validation and testing, with feature contributions visualized via pie charts. These models are widely used in bioinformatics for their accuracy and robustness in classification tasks like druggability prediction.
+                </p>
+            </div>
+            <div class="right2"><h2>
+                What model is employed to get the result? How reliable is the model?
+            </h2></div>
+        </div>
+        <div class="card2">
+            <div class="left"><h2>
+                Does it work on any protein or specific to a species?
+            </h2></div>
+            <div class="right"><p>
+                DrugProtAI is primarily designed to work with human proteins, as its dataset consists of 20,273 human proteins verified by SwissProt from UniProtKB. While the tool's models and features are optimized for human proteins, extending it to other species would require additional training and dataset adjustments.
+            </p>
+        </div>
+        </div>
+
+        <!-- Add more content here as needed -->
+    </div>
+    <div id="team">
+
+        <img src="{{ url_for('static', filename='tea.svg') }}" alt="About Image"  id = "imgeee">
+
+        <!-- Add more content here as needed -->
+    </div>
+
+    <div id="no-data-popup" style="
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 9999;
+    ">
+        No data found for this protein.
+    </div>
+
+    <div id = "ack">
+        <h2 class="about-heading">Acknowledgements</h2>
+        <div id = "overall">
+        <div id = "acky">
+            <div id = "subacky">
+                <a href="https://www.uniprot.org/" target="_blank" class="footer-link">
+                <img src="{{ url_for('static', filename='uni.png') }}" alt="Image 1" class="footer-image">
+                </a>
+                <p>UniProt</p>
+            </div>
+            <div id = "subacky">
+                <a href="https://go.drugbank.com/" target="_blank" class="footer-link">
+                <img src="{{ url_for('static', filename='drugbank.png') }}" alt="Image 1" class="footer-image">
+                </a>
+                <p>DrugBank</p>
+
+            </div>
+            <div id = "subacky">
+                <a href="https://deepmind.google/technologies/alphafold/" target="_blank" class="footer-link">
+                <img src="{{ url_for('static', filename='alpha.png') }}" alt="Image 1" class="footer-image">
+                </a>
+                <p>AlphaFold</p>
+            </div>
+            <div id = "subacky">
+                <a href="https://www.canva.com/" target="_blank" class="footer-link">
+                <img src="{{ url_for('static', filename='canva.png') }}" alt="Image 1" class="footer-image">
+                </a>
+                <p>Canva</p>
+            </div>
+        </div>
+        <div id = "acky2">
+            <div id = "subacky">
+
+                <img src="{{ url_for('static', filename='ack1.jpg') }}" alt="Image 1" class="footer-image2">
+
+                <p>Suhisna Dutta<br>
+                    IIT Bombay</p>
+            </div>
+            <div id = "subacky">
+
+                <img src="{{ url_for('static', filename='ack2.png') }}" alt="Image 1" class="footer-image2">
+
+                <p> Nirjhar Banerjee<br>
+                    IIT Bombay
+                </p>
+
+            </div>
+        </div>
+        </div>
+    </div>
+    <div id="contus">
+        <h2 class="about-heading">Contact Us</h2>
+        <div class = "footer">
+            <div class="footer-left"></div>
+            <div class="footer-middle">
+            <a href="https://www.bio.iitb.ac.in/~sanjeeva/facility/" target="_blank" class="footer-link">
+            <img src="{{ url_for('static', filename='massfiitb.png') }}" alt="Image 1" class="footer-image">
+            </a>
+            <a href="https://www.iitb.ac.in/" target="_blank" class="footer-link">
+            <img src="{{ url_for('static', filename='iitb.png') }}" alt="Image 2" class="footer-image">
+            </a>
+            </div>
+            <div class="footer-right"></div>
+
+        </div>
+
+        <!-- Add more content here as needed -->
+    </div>
+    <div id="citeus">
+        <h2 class="about-heading">Cite Us</h2>
+        <div class = "footer2">
+            <h4>
+            If you are using DrugProtAI, please cite us –
+            <br>
+            Ankit Halder, Sabyasachi Samantaray, Sahil Barbade, Aditya Gupta, Sanjeeva Srivastava,
+            <i>DrugProtAI: A machine learning–driven approach for predicting protein druggability through feature engineering and robust partition-based ensemble methods</i>,
+            <b>Briefings in Bioinformatics</b>, Volume 26, Issue 4, July 2025, bbaf330,
+            <a href="https://doi.org/10.1093/bib/bbaf330" target="_blank">https://doi.org/10.1093/bib/bbaf330</a>
+        </h4>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://3dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+
+
+</body>
+</html>
